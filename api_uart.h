@@ -1,3 +1,10 @@
+/*!
+	\file apu_uart.h
+	\brief API для работы с периферийными модулями UART
+	\author Gorin Alexey
+
+	Файл содержит определение типов и структур данных, обеспечивающих настройку периферии МК.
+*/
 
 #ifndef _API_UART
 #define  API_UART_EXTLBL 					extern
@@ -135,6 +142,16 @@ typedef enum {
 
 
 
+/*!
+	Функция обеспечивает инициализацию периферийного блока UART.
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	num IN номер периферийного блока [API_UART1, API_UART2, ...]
+	clock IN частота тактового сигнала для блока [Гц]
+	baud IN битовая скорость [бод]
+	parity IN режим бита чётности [API_UART_PARITY_EVEN, API_UART_PARITY_ODD]
+	stop IN количество стоп-битов [API_UART_STOP_05, API_UART_STOP_1, ...]
+*/
 API_UART_EXTLBL void API_UART_Init (
 		API_UART_t *, 
 		int, 
@@ -143,15 +160,65 @@ API_UART_EXTLBL void API_UART_Init (
 		API_UART_parity_t, 
 		API_UART_stop_t);
 
+/*!
+	Функция обеспечивает установку битовой скорости для периферийного блока
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	clock IN частота тактового сигнала для блока [Гц]
+	baud IN битовая скорость [бод]
+*/
 API_UART_EXTLBL void API_UART_set_baud 		(API_UART_t *, uint32_t, uint32_t);
+
+/*!
+	Функция обеспечивает установку режима бита чётности для периферийного блока
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	parity IN режим бита чётности [API_UART_PARITY_EVEN, API_UART_PARITY_ODD]
+*/
 API_UART_EXTLBL void API_UART_set_parity 	(API_UART_t *, API_UART_parity_t);
+
+/*!
+	Функция обеспечивает установку количества стоп-битов для периферийного блока
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	stop IN количество стоп-битов [API_UART_STOP_05, API_UART_STOP_1, ...]
+*/
 API_UART_EXTLBL void API_UART_set_stop 		(API_UART_t *, API_UART_stop_t);
 
+
+
+/*!
+	Функция обеспечивает установку CallBack на событие завершения передачи блока данных
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	fnc IN указатель на функцию CallBack
+*/
 API_UART_EXTLBL void API_UART_set_callback_Tx (API_UART_t *, API_UART_pFnk);
+
+/*!
+	Функция обеспечивает установку CallBack на событие приёма байта
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	fnc IN указатель на функцию CallBack
+*/
 API_UART_EXTLBL void API_UART_set_callback_Rx (API_UART_t *, API_UART_pFnk);
 
 
+
+/*!
+	Функция обеспечивает подготовку периферийонго блока к передаче блока данных
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+	p_data IN указатель на блок данных
+	p_data_len IN размер блока данных
+*/
 API_UART_EXTLBL void API_UART_transmit 		(API_UART_t *, uint8_t *, int);
 
 
+
+/*!
+	Функция обработчик прерываний от периферийного блока
+	Входные параметры:
+	pAPI_UART * IN указатель на структуру API_UART_t
+*/
 API_UART_EXTLBL void API_UART_IRQ_Handler 	(API_UART_t *);

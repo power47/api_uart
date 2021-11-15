@@ -45,7 +45,8 @@ void API_UART_Init (
 
 
 
-void API_UART_set_baud (API_UART_t * pAPI_UART, uint32_t baud, uint32_t clock)
+
+void API_UART_set_baud (API_UART_t * pAPI_UART, uint32_t clock, uint32_t baud)
 {
 	uint32_t div;
 	uint32_t mant;
