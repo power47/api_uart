@@ -1,3 +1,10 @@
+/*!
+	\file api_uart.c
+	\brief API для работы с периферийными модулями UART
+	\author Gorin Alexey
+
+	Файл содержит реализацию функция API для работы с периферийными модулями UART.
+*/
 #include <stdio.h>
 #include <stdint.h>
 

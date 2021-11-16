@@ -1,0 +1,7 @@
+doxygen/
+*.plg
+*.dep
+*.bak
+*.uvgui*
+*.uvopt*
+
